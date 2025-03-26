@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #282c34;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%; /* Адаптивна ширина */
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Адаптивност за landscape ориентация.... */
+@media (orientation: landscape) {
+    .container {
+        flex-direction: column;         /* Хоризонтално подреждане */
+        justify-content: space-around;  /* Пространство между елементите */
+        height: 80vh;                   /* Ограничение на височината */
+    }
+    canvas {
+        width: 40vw;                    /* Размер на платното */
+        height: auto;                   /* Запазване на съотношението */
+    }
+}
+
+/* Адаптивност за мобилни устройства */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;          /* Вертикално подреждане */
+        gap: 15px;
+    }
+    canvas {
+        width: 80%;                       /* Размер на платното */
+        max-height: 60vh;
+    }
+}
+
+canvas {
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 350px;
+    max-height: 300px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-container, .difficulty-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.language-container label, .difficulty-container label {
+    font-size: 1rem;
+    margin: 5px;
+}
+
+/* Стилизиране за радио бутоните */
+.language-container input[type="radio"], .difficulty-container input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+input[type="text"] {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+}

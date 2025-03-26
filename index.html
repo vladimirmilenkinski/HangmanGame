@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1 id="game-title">Hangman</h1>
+    <canvas id="hangman"></canvas>
+    <div id="word-container"></div>
+    <p id="hint" class="text-info"></p>
+    <div id="wrong-letters-container">
+        <p id="wrong-letters-label">Wrong Letters:</p>
+        <span id="wrong-letters"></span>
+    </div>
+    <input type="text" id="custom-word" maxlength="1" placeholder="Enter a letter">
+    <p id="message" class="text-warning"></p>
+    <div class="settings">
+        <div id="language-container">
+            <label><input type="radio" name="language" value="english" checked> English</label>
+            <label><input type="radio" name="language" value="bulgarian"> Български</label>
+        </div>
+        <div id="difficulty-container">
+            <label><input type="radio" name="difficulty" value="easy" checked> Easy</label>
+            <label><input type="radio" name="difficulty" value="medium"> Medium</label>
+            <label><input type="radio" name="difficulty" value="hard"> Hard</label>
+        </div>
+    </div>
+    <button id="start-game">Start Game</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
