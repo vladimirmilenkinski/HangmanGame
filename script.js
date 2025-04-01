@@ -188,27 +188,36 @@ function setupGame(wordObject, language) {
     resizeCanvas();
 }
 
-    // Слушатели за събития при използваните въведени букви букви /ако езика е грешния да извежда предупреждение
+   // Слушатели за събития при използваните въведени букви букви /ако езика е грешния да извежда предупреждение
 customWordInput.addEventListener('input', (e) => {
     const letter = e.target.value.toLowerCase().trim();
     e.target.value = '';
     const language = document.querySelector('input[name="language"]:checked')?.value || 'english';
-    const englishRegex = /^[a-z]$/; //ще позволи само латиница
-    const bulgarianRegex = /^[а-я]$/; //ще позволи само кирилица
-    if (( language==='english' && !letter.match(englishRegex)) || (language==='bulgarian' && !letter.match(bulgarianRegex))){
-        message.textContent = `Please insert leters in ${language=== 'english' ? 'English' : 'Bulgarian'}. `;
+    const englishRegex = /^[a-z]$/; // Позволява само латиница
+    const bulgarianRegex = /^[а-я]$/; // Позволява само кирилица
+
+    // Ако буквата е от грешна азбука – показва предупреждение на избрания език и скриваме автоматично след 2 секунди
+    if ((language === 'english' && !letter.match(englishRegex)) ||
+        (language === 'bulgarian' && !letter.match(bulgarianRegex))) {
+        message.textContent = translations[language].invalidAlphabet;
         message.style.color = "red";
-        return;
-    }
-    if (!letter.match(/^[a-zа-я]$/i)) {
-        message.textContent = translations[language].enterLetter;
-        message.style.color = "orange";
+        setTimeout(() => { message.textContent = ''; }, 2000);
         return;
     }
 
+    // Ако въведената стойност не е буква, показва съобщение и скриваме след 2 секунди
+    if (!letter.match(/^[a-zа-я]$/i)) {
+        message.textContent = translations[language].enterLetter;
+        message.style.color = "orange";
+        setTimeout(() => { message.textContent = ''; }, 2000);
+        return;
+    }
+
+    // Ако буквата вече е позната – предупреждение
     if (correctLetters.includes(letter) || wrongLetters.includes(letter)) {
-        message.textContent = "You already guessed this letter.";
+        message.textContent = translations[language].alreadyGuessed;
         message.style.color = "yellow";
+        setTimeout(() => { message.textContent = ''; }, 2000);
         return;
     }
 
@@ -220,6 +229,7 @@ customWordInput.addEventListener('input', (e) => {
         updateWrongLetters();
     }
 });
+
     // следи за превод на език
 document.querySelectorAll('input[name="language"]').forEach(radio => {
     radio.addEventListener('change', () => {
